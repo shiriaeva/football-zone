@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>update football player</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <style>
+        .form-error-message{
+            position: fixed;
+            left: 600px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Update Football Player</h1>
+    <hr>
+    <h2></h2>
+    <form action="#" th:action="@{/save}" th:object="${playerDto}" name="AddPlayerForm"
+           onchange="return validationScript()" onfocus=" return validationScript()"
+          onblur=" return validationScript()" onsubmit="return validationScript()"
+          onmousemove="return validationScript()" method="POST" >
+        <input th:field="*{id}" hidden/>
+        <h6>Name &nbsp;&nbsp;</h6>
+        <label for="name" id="nameMessages" class="form-error-message"></label>
+        <span>
+            <input id="name" type="text" name="name" th:field="*{name}" class="form-control mb-4 col-4"/>
+        </span>
+
+        <h6>Surname &nbsp;&nbsp;</h6>
+        <label for="surname" id="surnameMessages" class="form-error-message"></label>
+        <span>
+            <input id="surname" type="text" name="surname" th:field="*{surname}" class="form-control mb-4 col-4">
+        </span>
+
+        <div id="gender" class="form-group" th:field="*{gender}">
+            <h6>Gender &nbsp;&nbsp;</h6>
+            <label for="female" id="messages" class="form-error-message"></label>
+            <span>
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="male" name="gender" value="male">
+                <label class="form-check-label">Male</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="female" name="gender" value="female">
+                <label class="form-check-label">Female</label>
+            </div>
+            </span>
+        </div>
+
+        <div class="form-group" th:field="*{birthdate}">
+            <h6>Date of birth</h6>
+            <label for="birthdate" id="birthdateMessages" class="form-error-message"></label>
+            <span>
+                <input id="birthdate" type="date" class="form-control mb-4 col-4" name="birthdate">
+            </span>
+        </div>
+
+        <h6>Team &nbsp;&nbsp;</h6>
+        <label for="team" id="teamMessages" class="form-error-message"></label>
+        <span>
+            <input type="text" id="team" name="team" list="teamnames" th:field="*{teamName}" class="form-control mb-4 col-4">
+            <datalist id="teamnames">
+                <option th:each="team : ${allTeamsList}" th:value="${team.name}">
+            </datalist>
+        </span>
+
+        <h6>Country &nbsp;&nbsp;</h6>
+        <label id="countryMessages" class="form-error-message" style="float:left"> </label>
+        <input type="text" id="country" name="country" list="countrynames" th:field="*{countryName}" class="form-control mb-4 col-4">
+        <datalist id="countrynames">
+            <option th:each="country : ${allCountriesList}" th:value="${country.name}">
+        </datalist>
+
+        <button type="submit" class="btn btn-info btn-submit col-2">Update</button>
+    </form>
+    <hr>
+    <a th:href = "@{/}"> Back to Player List</a>
+</div>
+<script src="validationScript.js"></script>
+</body>
+</html>
+

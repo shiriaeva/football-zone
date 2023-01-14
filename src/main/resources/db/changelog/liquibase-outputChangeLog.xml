@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="shiryaeva (generated)" id="1673116036784-1">
+        <createSequence sequenceName="countries_id_seq"/>
+    </changeSet>
+    <changeSet author="shiryaeva (generated)" id="1673116036784-2">
+        <createSequence sequenceName="players_id_seq"/>
+    </changeSet>
+    <changeSet author="shiryaeva (generated)" id="1673116036784-3">
+        <createSequence sequenceName="teams_id_seq"/>
+    </changeSet>
+    <changeSet author="shiryaeva (generated)" id="1673116036784-4">
+        <createTable tableName="countries">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="countries_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiryaeva (generated)" id="1673116036784-5">
+        <createTable tableName="players">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="players_pkey"/>
+            </column>
+            <column name="birthdate" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="team_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiryaeva (generated)" id="1673116036784-6">
+        <createTable tableName="teams">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="teams_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="shiryaeva (generated)" id="1673116036784-7">
+        <addForeignKeyConstraint baseColumnNames="team_id" baseTableName="players" constraintName="fk5nglidr00c4dyybl171v6kask" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="teams"/>
+    </changeSet>
+    <changeSet author="shiryaeva (generated)" id="1673116036784-8">
+        <addForeignKeyConstraint baseColumnNames="country_id" baseTableName="players" constraintName="fkqntvf7pxlrop31khocahqiclo" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="countries"/>
+    </changeSet>
+</databaseChangeLog>
